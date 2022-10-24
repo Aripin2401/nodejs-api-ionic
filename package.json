@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-api-ionic",
+  "version": "1.0.0",
+  "description": "![My Remote Image](https://logospng.org/download/node-js/logo-node-js-256.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aripin2401/nodejs-api-ionic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aripin2401/nodejs-api-ionic/issues"
+  },
+  "homepage": "https://github.com/Aripin2401/nodejs-api-ionic#readme"
+}
