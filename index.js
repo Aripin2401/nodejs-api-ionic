@@ -34,28 +34,41 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/assets',express.static(__dirname + '/public'));
  
 //route untuk homepage
-app.get('/',(req, res) => {
+app.get('/api/',(req, res) => {
   let sql = "SELECT * FROM user";
   let query = conn.query(sql, (err, results) => {
+    // if(err) throw err;
+    // res.render('user_view',{
+    //   results: results
+    // });
     if(err) throw err;
-    res.render('user_view',{
-      results: results
-    });
+    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
   });
 });
  
+// router untuk single user
+app.get('/api/user/:id',(req, res) => {
+  let sql = "SELECT * FROM user WHERE id="+req.params.id;
+  let query = conn.query(sql, (err, results) => {
+    if(err) throw err;
+    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+  });
+});
+
 //route untuk insert data
-app.post('/save',(req, res) => {
+app.post('/api/save',(req, res) => {
   let data = {name: req.body.name, description, website, phone, email, address: req.body.name};
   let sql = "INSERT INTO user SET ?";
   let query = conn.query(sql, data,(err, results) => {
+    // if(err) throw err;
+    // res.redirect('/');
     if(err) throw err;
-    res.redirect('/');
+    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
   });
 });
  
 //route untuk update data
-app.post('/update',(req, res) => {
+app.post('/api/update',(req, res) => {
   let sql = "UPDATE user SET name='"+req.body.name+"', description='"+req.body.description+"', websit='"+req.body.website+"', phone='"+req.body.phone+"', email='"+req.body.email+"', address='"+req.body.address+"' WHERE id="+req.body.id;
   let query = conn.query(sql, (err, results) => {
     if(err) throw err;
@@ -64,7 +77,7 @@ app.post('/update',(req, res) => {
 });
  
 //route untuk delete data
-app.post('/delete',(req, res) => {
+app.post('/api/delete',(req, res) => {
   let sql = "DELETE FROM user WHERE id="+req.body.id+"";
   let query = conn.query(sql, (err, results) => {
     if(err) throw err;
